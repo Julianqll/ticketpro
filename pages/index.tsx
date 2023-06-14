@@ -4,7 +4,11 @@ import cliente from '../graphql/cliente';
 import { useQuery } from '@apollo/client';
 import GET_USERS from '../procedures/usuarioProcedures';
 import UsuarioBC from  "../BC/usuarioBC";
-
+import { CardsCarousel } from '../components/carousel';
+import { FeaturesAsymmetrical } from '../components/cards';
+import { HeroBullets } from '../components/hero';
+import { FooterLinks } from '../components/footer';
+import { Title } from '@mantine/core';
 
 
 const DisplayUsers = () => {
@@ -32,12 +36,14 @@ const DisplayUsers = () => {
 const HomePage = () => {
 
   return (
-    <ApolloProvider client={cliente}>
+
     <div>
-      <div>Platzi and Next.js!</div>
-      <DisplayUsers></DisplayUsers>
+    <CardsCarousel></CardsCarousel>    
+    <FeaturesAsymmetrical></FeaturesAsymmetrical>
+    <HeroBullets></HeroBullets>
+
     </div>
-    </ApolloProvider>
+    
   );
 }
 
