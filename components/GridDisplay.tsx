@@ -1,6 +1,6 @@
 import { createStyles, Text, SimpleGrid, Container, rem, Title } from '@mantine/core';
 import { IconTruck, IconCertificate, IconCoin } from '@tabler/icons-react';
-import { ArticleCardFooter } from './articleCard';
+import { ArticleCard } from './ArticleCard';
 
 const useStyles = createStyles((theme) => ({
   feature: {
@@ -37,31 +37,6 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-interface FeatureProps extends React.ComponentPropsWithoutRef<'div'> {
-  icon: React.FC<any>;
-  title: string;
-  description: string;
-}
-
-function Feature({ icon: Icon, title, description, className, ...others }: FeatureProps) {
-  const { classes, cx } = useStyles();
-
-  return (
-    <div className={cx(classes.feature, className)} {...others}>
-      <div className={classes.overlay} />
-
-      <div className={classes.content}>
-        <Icon size={rem(38)} className={classes.icon} stroke={1.5} />
-        <Text fw={700} fz="lg" mb="xs" mt={5} className={classes.title}>
-          {title}
-        </Text>
-        <Text c="dimmed" fz="sm">
-          {description}
-        </Text>
-      </div>
-    </div>
-  );
-}
 
 const mockdata = [
   {
@@ -100,8 +75,8 @@ const mockdata = [
 ];
 
 
-export function FeaturesAsymmetrical() {
-  const items = mockdata.map((item) => <ArticleCardFooter {...item} key={item.title} />);
+export function GridDisplay() {
+  const items = mockdata.map((item) => <ArticleCard {...item} key={item.title} />);
   const { classes, cx } = useStyles();
   return (
     <Container mt={30} mb={30} size="lg">

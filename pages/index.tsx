@@ -1,14 +1,8 @@
 import React from 'react'
-import { ApolloProvider} from "@apollo/react-hooks"
-import cliente from '../graphql/cliente';
-import { useQuery } from '@apollo/client';
-import GET_USERS from '../procedures/usuarioProcedures';
 import UsuarioBC from  "../BC/usuarioBC";
-import { CardsCarousel } from '../components/carousel';
-import { FeaturesAsymmetrical } from '../components/cards';
-import { HeroBullets } from '../components/hero';
-import { FooterLinks } from '../components/footer';
-import { Title } from '@mantine/core';
+import { CardsCarousel } from '../components/CardsCarousel';
+import { GridDisplay } from '../components/GridDisplay';
+import { Hero } from '../components/Hero';
 
 
 const DisplayUsers = () => {
@@ -39,8 +33,8 @@ const HomePage = () => {
 
     <div>
     <CardsCarousel></CardsCarousel>    
-    <FeaturesAsymmetrical></FeaturesAsymmetrical>
-    <HeroBullets></HeroBullets>
+    <GridDisplay></GridDisplay>
+    <Hero></Hero>
 
     </div>
     

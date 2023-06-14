@@ -29,7 +29,7 @@ import {
     },
   }));
   
-  interface ArticleCardFooterProps {
+  interface ArticleCardProps {
     image: string;
     category: string;
     title: string;
@@ -41,13 +41,13 @@ import {
     };
   }
   
-  export function ArticleCardFooter({
+  export function ArticleCard({
     image,
     category,
     title,
     footer,
     author,
-  }: ArticleCardFooterProps) {
+  }: ArticleCardProps) {
     const { classes, theme } = useStyles();
   
     return (

@@ -97,14 +97,14 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-interface FooterLinksProps {
+interface FooterProps {
   data: {
     title: string;
     links: { label: string; link: string }[];
   }[];
 }
 
-export function FooterLinks({ data }: FooterLinksProps) {
+export function Footer({ data }: FooterProps) {
   const { classes } = useStyles();
 
   const groups = data.map((group) => {

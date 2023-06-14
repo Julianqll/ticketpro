@@ -78,7 +78,7 @@ import {
     }
   }));
   
-  export function HeroBullets() {
+  export function Hero() {
     const { classes } = useStyles();
     return (
       <div className={classes.hero}>

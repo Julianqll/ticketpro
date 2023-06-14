@@ -40,31 +40,31 @@ function Card({ image, title, category }: CardProps) {
   const { classes } = useStyles();
 
   return (
-<Paper
-  shadow="md"
-  p="xl"
-  radius={0}
-  sx={{ 
-    backgroundImage: `url(${image})`,
-    display: 'flex', // Agrega display flex al paper
-    flexDirection: 'column', // Asegura que los elementos hijos estén en columnas
-    justifyContent: 'center', // Alinea los elementos hijos hacia el final del eje principal (abajo)
-    alignItems: 'flex-start', // Alinea los elementos hijos hacia el inicio del eje transversal (izquierda)
-  }}
-  className={classes.card}
->
-  <Group maw={500} ml={50}>
-    <Text className={classes.category} size="xs">
-      {category}
-    </Text>
-    <Title order={3} className={classes.title}>
-      {title}
-    </Title>
-    <Button color="white" bg={'#00CC99'}>
-      Ver más
-    </Button>
-  </Group>
-</Paper>
+    <Paper
+      shadow="md"
+      p="xl"
+      radius={0}
+      sx={{ 
+        backgroundImage: `url(${image})`,
+        display: 'flex', // Agrega display flex al paper
+        flexDirection: 'column', // Asegura que los elementos hijos estén en columnas
+        justifyContent: 'center', // Alinea los elementos hijos hacia el final del eje principal (abajo)
+        alignItems: 'flex-start', // Alinea los elementos hijos hacia el inicio del eje transversal (izquierda)
+      }}
+      className={classes.card}
+    >
+      <Group maw={500} ml={50}>
+        <Text className={classes.category} size="xs">
+          {category}
+        </Text>
+        <Title order={3} className={classes.title}>
+          {title}
+        </Title>
+        <Button color="white" bg={'#00CC99'}>
+          Ver más
+        </Button>
+      </Group>
+    </Paper>
 
   );
 }

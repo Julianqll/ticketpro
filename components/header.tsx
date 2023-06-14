@@ -111,12 +111,12 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-interface HeaderTabsProps {
+interface HeaderProps {
   user: { name: string; image: string };
   tabs: string[];
 }
 
-export function HeaderTabsColored({ user, tabs }: HeaderTabsProps) {
+export function Header({ user, tabs }: HeaderProps) {
   const { classes, theme, cx } = useStyles();
   const [opened, { toggle }] = useDisclosure(false);
   const [userMenuOpened, setUserMenuOpened] = useState(false);
@@ -132,7 +132,7 @@ export function HeaderTabsColored({ user, tabs }: HeaderTabsProps) {
     >
       <Container className={classes.mainSection}>
         <Group position="apart">
-            <Text weight={700} size="xl" sx={{ lineHeight: 1, color: theme.white }} mr={3}>
+            <Text weight={700} size={30} sx={{ lineHeight: 1, color: theme.white }} mr={3}>
                 TICKETPRO
             </Text>
           <Burger
@@ -151,18 +151,20 @@ export function HeaderTabsColored({ user, tabs }: HeaderTabsProps) {
             onOpen={() => setUserMenuOpened(true)}
             withinPortal
           >
+                <Group spacing={20}>
+
+            <Autocomplete
+              className={classes.search}
+              placeholder="Search"
+              icon={<IconSearch size="1rem" stroke={1.5} />}
+              data={['React', 'Angular', 'Vue', 'Next.js', 'Riot.js', 'Svelte', 'Blitz.js']}
+              />
             <Menu.Target>
               <UnstyledButton
                 className={cx(classes.user, { [classes.userActive]: userMenuOpened })}
               >
                 <Group spacing={20}>
-                <Autocomplete
-            className={classes.search}
-            placeholder="Search"
-            icon={<IconSearch size="1rem" stroke={1.5} />}
-            data={['React', 'Angular', 'Vue', 'Next.js', 'Riot.js', 'Svelte', 'Blitz.js']}
-            />
-                  <Avatar src={user.image} alt={user.name} radius="xl" size={20} />
+                  <Avatar src={user.image} alt={user.name} radius="xl" size={30} />
                   <Text weight={500} size="sm" sx={{ lineHeight: 1, color: theme.white }} mr={3}>
                     {user.name}
                   </Text>
@@ -170,6 +172,8 @@ export function HeaderTabsColored({ user, tabs }: HeaderTabsProps) {
                 </Group>
               </UnstyledButton>
             </Menu.Target>
+            </Group>
+
             <Menu.Dropdown>
               <Menu.Item
                 icon={<IconHeart size="0.9rem" stroke={1.5} color={theme.colors.red[6]} />}
