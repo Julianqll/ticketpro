@@ -1,5 +1,5 @@
 import type { AppProps } from 'next/app'
-import Layout from '../components/layout'
+import Layout from '../components/Layout'
 import { ApolloProvider } from '@apollo/react-hooks'
 import cliente from '../graphql/cliente'
  
