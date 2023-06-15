@@ -6,7 +6,7 @@ type UsuarioBE = {
     contrasena: string;
     direccion: string;
     telefono: string;
-    rol: number;
+    rolId: number;
     estado: number;
 };
 
