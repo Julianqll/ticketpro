@@ -1,5 +1,5 @@
 import { gql } from '@apollo/client';
-
+//Procedure Listar Usuarios
 const GET_USERS = gql`
   query GetUsers {
     usuario {

@@ -2,8 +2,7 @@ import React from 'react'
 import UsuarioBC from  "../BC/usuarioBC";
 import { CardsCarousel } from '../components/CardsCarousel';
 import { GridDisplay } from '../components/GridDisplay';
-import { Hero } from '../components/Hero';
-
+import { Hero } from '../components/hero';
 
 const DisplayUsers = () => {
 
@@ -24,7 +23,6 @@ const DisplayUsers = () => {
       <div>Cargando usuarios...</div>
     );
   }
-
 }
 
 const HomePage = () => {

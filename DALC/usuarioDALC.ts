@@ -18,7 +18,7 @@ const UsuarioDALC = {
                   contrasena: usuario.contrasena,
                   direccion: usuario.direccion,
                   telefono: usuario.telefono,
-                  rol: usuario.rol,
+                  rolId: usuario.rol,
                   estado: usuario.estado
                 };
               
