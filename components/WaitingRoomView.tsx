@@ -67,14 +67,14 @@ import {
                 TicketPro es la plataforma de venta de tickets para eventos que te permite comprar de manera segura, rápida y sencilla. Con tan solo 3 simples pasos.
                 TicketPro es la plataforma de venta de tickets para eventos que te permite comprar de manera segura, rápida y sencilla. Con tan solo 3 simples pasos.
         </Text>
-        <Flex
-            mih={50}
-            gap="md"
-            justify="center"
-            align="center"
-            direction="row"
-            wrap="wrap"
-            mt={30}
+            <Flex
+                mih={50}
+                gap="md"
+                justify="center"
+                align="center"
+                direction="row"
+                wrap="wrap"
+                mt={30}
             >
                 <Button radius="xl" size="md" className={classes.control} bg={'#00CC99'}>
                   Venta Normal
