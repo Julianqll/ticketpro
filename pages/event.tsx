@@ -6,21 +6,32 @@ import { HeroTicket } from '../components/HeroTicket';
 import { HeroInfo } from '../components/HeroInfo';
 import { HeroPrices } from '../components/HeroPrices';
 import { HeroConditions } from '../components/HeroConditions';
+import type { ReactElement } from 'react'
+import type { NextPageWithLayout } from './_app'
+import { ApolloProvider } from '@apollo/react-hooks';
+import Layout from '../components/Layout';
+import cliente from '../graphql/cliente';
 
-
-const TicketPage = () => {
-
+const EventPage: NextPageWithLayout = () => {
   return (
-
     <div>
     <HeroTicket></HeroTicket>
     <HeroInfo></HeroInfo>
     <HeroPrices></HeroPrices>
     <HeroConditions></HeroConditions>
-
     </div>
-    
   );
 }
 
-export default TicketPage
+EventPage.getLayout = function getLayout(page: ReactElement){
+  return (
+    <ApolloProvider client={cliente}>
+        <Layout>
+            {page}
+        </Layout>
+    </ApolloProvider>
+  )
+}
+
+
+export default EventPage
