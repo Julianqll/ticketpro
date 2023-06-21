@@ -9,38 +9,16 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import Layout from '../components/Layout';
 import cliente from '../graphql/cliente';
 
-const DisplayUsers = () => {
 
-  let usuarios = UsuarioBC.listarUsuarios();
-  if (usuarios != undefined){
-    return (
-      <>
-        {usuarios.map(usuario => (
-          <div key={usuario.usuarioId}>
-            <h3>{usuario.nombre} {usuario.apellido}</h3>
-          </div>
-        ))}
-      </>
-    );
-  }
-  else{
-    return(
-      <div>Cargando usuarios...</div>
-    );
-  }
-}
-
-const HomePage: NextPageWithLayout  = () => {
+const EventsTypePage: NextPageWithLayout  = () => {
   return (
     <div>
-    <CardsCarousel></CardsCarousel>    
     <GridDisplay></GridDisplay>
-    <Hero></Hero>
     </div>
   );
 }
 
-HomePage.getLayout = function getLayout(page: ReactElement){
+EventsTypePage.getLayout = function getLayout(page: ReactElement){
   return (
     <ApolloProvider client={cliente}>
         <Layout>
@@ -50,4 +28,4 @@ HomePage.getLayout = function getLayout(page: ReactElement){
   )
 }
 
-export default HomePage
+export default EventsTypePage

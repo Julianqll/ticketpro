@@ -8,39 +8,18 @@ import type { NextPageWithLayout } from './_app'
 import { ApolloProvider } from '@apollo/react-hooks';
 import Layout from '../components/Layout';
 import cliente from '../graphql/cliente';
+import { HeroBuy } from '../components/HeroBuy';
 
-const DisplayUsers = () => {
 
-  let usuarios = UsuarioBC.listarUsuarios();
-  if (usuarios != undefined){
-    return (
-      <>
-        {usuarios.map(usuario => (
-          <div key={usuario.usuarioId}>
-            <h3>{usuario.nombre} {usuario.apellido}</h3>
-          </div>
-        ))}
-      </>
-    );
-  }
-  else{
-    return(
-      <div>Cargando usuarios...</div>
-    );
-  }
-}
-
-const HomePage: NextPageWithLayout  = () => {
+const BuyPage: NextPageWithLayout  = () => {
   return (
     <div>
-    <CardsCarousel></CardsCarousel>    
-    <GridDisplay></GridDisplay>
-    <Hero></Hero>
+    <HeroBuy></HeroBuy>
     </div>
   );
 }
 
-HomePage.getLayout = function getLayout(page: ReactElement){
+BuyPage.getLayout = function getLayout(page: ReactElement){
   return (
     <ApolloProvider client={cliente}>
         <Layout>
@@ -50,4 +29,4 @@ HomePage.getLayout = function getLayout(page: ReactElement){
   )
 }
 
-export default HomePage
+export default BuyPage
