@@ -10,7 +10,12 @@ import {
     Anchor,
     rem,
     Flex,
+    Autocomplete,
+    Loader,
   } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
+import { useRef, useState } from 'react';
+import { InputTooltip } from './PasswordInputs';
   
   const useStyles = createStyles((theme) => ({
     wrapper: {
@@ -57,12 +62,36 @@ import {
   
   export function RegisterImage() {
     const { classes } = useStyles();
+    const [visible, { toggle }] = useDisclosure(false);
+
+
+    const timeoutRef = useRef<number>(-1);
+    const [value, setValue] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [data, setData] = useState<string[]>([]);
+  
+    const handleChange = (val: string) => {
+      window.clearTimeout(timeoutRef.current);
+      setValue(val);
+      setData([]);
+  
+      if (val.trim().length === 0 || val.includes('@')) {
+        setLoading(false);
+      } else {
+        setLoading(true);
+        timeoutRef.current = window.setTimeout(() => {
+          setLoading(false);
+          setData(['gmail.com', 'outlook.com', 'yahoo.com'].map((provider) => `${val}@${provider}`));
+        }, 1000);
+      }
+    };
+    
     return (
       <div className={classes.wrapper}>
 
         <Paper className={classes.form} radius={0} p={30}>
             
-        <Text weight={700} size={30} sx={{ lineHeight: 1, color: 'black' }} ta="center" mt={150} mb={50}>
+        <Text weight={700} size={30} sx={{ lineHeight: 1, color: 'black' }} ta="center" mt={100} mb={30}>
                 TICKETPRO
         </Text>
 
@@ -86,12 +115,14 @@ import {
             label="Nombres"
             placeholder="John Doe"
             mt="md"
+            required
             classNames={{ input: classes.input, label: classes.inputLabel }}
           />
         <TextInput
             label="Apellidos"
-            placeholder="John Doe"
+            placeholder="Doe"
             mt="md"
+            required
             classNames={{ input: classes.input, label: classes.inputLabel }}
           />
         </Flex>
@@ -104,13 +135,38 @@ import {
         wrap="wrap"
         >
         <TextInput
-            label="Dirección"
-            placeholder="your@email.com"
+            label="DNI"
+            placeholder="Documento de identidad"
             mt="md"
-
             required
             classNames={{ input: classes.input, label: classes.inputLabel }}
           />
+        <TextInput
+            label="Dirección"
+            placeholder="Dirección de prueba"
+            mt="md"
+            required
+            classNames={{ input: classes.input, label: classes.inputLabel }}
+          />
+        </Flex>
+        <Flex
+        mih={50}
+        gap="md"
+        justify="center"
+        align="center"
+        direction="row"
+        wrap="wrap"
+        >
+        <Autocomplete
+          value={value}
+          data={data}
+          mt="md"
+          onChange={handleChange}
+          rightSection={loading ? <Loader size="1rem" /> : null}
+          label="Correo"
+          required
+          placeholder="Tu correo"
+        />
         <TextInput
             label="Teléfono"
             placeholder="your@email.com"
@@ -120,35 +176,17 @@ import {
             classNames={{ input: classes.input, label: classes.inputLabel }}
           />
         </Flex>
-        <TextInput
-            label="Correo"
-            placeholder="your@email.com"
-            mt="md"
-
-            required
-            classNames={{ input: classes.input, label: classes.inputLabel }}
-          />
+        
         <Flex
         mih={50}
         gap="md"
         justify="center"
-        align="center"
         direction="row"
         wrap="wrap"
         >
-        <TextInput
-            label="Nombres"
-            placeholder="John Doe"
-            mt="md"
-            classNames={{ input: classes.input, label: classes.inputLabel }}
-          />
-        <TextInput
-            label="Apellidos"
-            placeholder="John Doe"
-            mt="md"
-            classNames={{ input: classes.input, label: classes.inputLabel }}
-          />
+          <InputTooltip></InputTooltip>
         </Flex>
+
 
         </Flex>
 
