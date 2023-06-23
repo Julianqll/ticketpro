@@ -16,10 +16,11 @@ import {
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { useEffect, useRef, useState } from 'react';
-import UsuarioBE from '../BE/usuarioBE';
 import UsuarioBC from '../BC/usuarioBC';
 import { useMutation } from '@apollo/react-hooks';
 import { ADD_USER } from '../procedures/usuarioProcedures';
+import { notifications } from '@mantine/notifications';
+import { IconCheck } from '@tabler/icons-react';
   
   const useStyles = createStyles((theme) => ({
     wrapper: {
@@ -89,6 +90,27 @@ import { ADD_USER } from '../procedures/usuarioProcedures';
     const [validEmail, setValidEmail] = useState(true);
     const [addUser, { data, loading, error }] = useMutation(ADD_USER);
 
+    useEffect(() => {
+        if (data) {
+          notifications.show({
+            id: 'load-data',
+            color: 'teal',
+            title: 'Registro exitoso',
+
+            message: 
+            <>
+              Ya puede iniciar sesión {' '}
+              <Anchor<'a'> href="/login" weight={700}>
+              aquí
+              </Anchor>
+            </>
+            ,
+            icon: <IconCheck size="1rem" />,
+            autoClose: false
+          });
+          }
+    }, [data]);
+  
     //validaciones
     useEffect(() => {
       const passwordsMatch = valuePassword === valueRepeatPassword;
@@ -118,7 +140,7 @@ import { ADD_USER } from '../procedures/usuarioProcedures';
       if (valueEmail.length > 0) {
         emailMatch = emailRegex.test(valueEmail);
       }
-      setValidDNI(emailMatch);
+      setValidEmail(emailMatch);
     }, [valueEmail]);
     
 
@@ -140,7 +162,7 @@ import { ADD_USER } from '../procedures/usuarioProcedures';
       }
     };
 
-    const handleRegister = () => {
+    const handleRegister = async () => {
       const usuarioNuevo = {
         nombre: valueNames,
         apellido: valueLastName,
@@ -152,14 +174,13 @@ import { ADD_USER } from '../procedures/usuarioProcedures';
         rolId: 2,
         telefono: valueTelephone,
       }
-      const added = UsuarioBC.añadirUsuario(addUser, usuarioNuevo);
-      if (error) {
-        console.log("error");
-
-      }
-      if (data){
-        console.log(data);
-
+      try {
+        await UsuarioBC.añadirUsuario(addUser, usuarioNuevo);
+      } catch (error) {
+        notifications.show({
+          title: 'Error',
+          message: 'Hey there, your code is awesome! 🤥',
+        });
       }
     };
 
@@ -303,12 +324,12 @@ import { ADD_USER } from '../procedures/usuarioProcedures';
                 />
               </Flex>
             </Flex>
-            <Button  fullWidth mt="xl" size="md" onClick={() => handleRegister()}>
+            <Button  fullWidth mt="xl" size="md" onClick={handleRegister} disabled={loading ? true : undefined }>
               Registrarse
             </Button>
           <Text ta="center" mt="md">
             Ya tienes una cuenta{' '}
-            <Anchor<'a'> href="#" weight={700} onClick={(event) => event.preventDefault()}>
+            <Anchor<'a'> href="/login" weight={700}>
               Ingresa aquí
             </Anchor>
           </Text>

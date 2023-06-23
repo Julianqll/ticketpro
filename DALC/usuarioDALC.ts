@@ -1,6 +1,7 @@
 import UsuarioBE from "../BE/usuarioBE";
 import { useQuery, useMutation } from '@apollo/client';
 import {ADD_USER, GET_USERS} from "../procedures/usuarioProcedures";
+import { notifications } from "@mantine/notifications";
 
 
 const UsuarioDALC = {
@@ -29,8 +30,22 @@ const UsuarioDALC = {
         }
 
     },
-    añadirUsuario: (addUser, usuario) => {
-      addUser({ variables: { input: usuario } });
+    añadirUsuario: async (addUser, usuario) => {
+      try {
+        await addUser({ variables: { input: usuario } });
+      } catch (error) {
+        if (error.message.includes('duplicate key value violates unique constraint "usuario_dni_email_telefono_key"')) {
+          notifications.show({
+            title: 'Error',
+            message: 'Usted ya está registrado',
+          });
+        } else {
+          notifications.show({
+            title: 'Error',
+            message: 'Ha ocurrido un error al agregar el usuario',
+          });
+        }
+      }
     },
 }
 
