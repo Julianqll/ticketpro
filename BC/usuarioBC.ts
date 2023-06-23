@@ -5,6 +5,10 @@ const UsuarioBC = {
      listarUsuarios(): UsuarioBE[] | undefined {
         return UsuarioDALC.listarUsuarios();
     },
+
+    añadirUsuario: (addUser, usuario) => {
+      UsuarioDALC.añadirUsuario(addUser, usuario);
+    },
   };
 
 export default UsuarioBC;

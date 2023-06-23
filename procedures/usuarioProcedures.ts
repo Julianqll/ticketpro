@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client';
 //Procedure Listar Usuarios
-const GET_USERS = gql`
+export const GET_USERS = gql`
   query GetUsers {
     usuario {
         usuarioId
@@ -10,4 +10,13 @@ const GET_USERS = gql`
   }
 `;
 
-export default GET_USERS;
+export const ADD_USER = gql`
+mutation AddUser($input: usuario_insert_input!) {
+  insert_usuario_one(object: $input) {
+    nombre
+    apellido
+  }
+}
+
+`;
+

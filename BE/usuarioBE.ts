@@ -2,12 +2,13 @@ type UsuarioBE = {
     usuarioId: number;
     nombre: string;
     apellido: string;
-    email: string;
     contrasena: string;
     direccion: string;
-    telefono: string;
+    dni: string;
+    email: string;
+    estado: boolean;
     rolId: number;
-    estado: number;
+    telefono: string;
 };
 
 export default UsuarioBE;

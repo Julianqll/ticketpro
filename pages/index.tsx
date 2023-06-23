@@ -42,11 +42,9 @@ const HomePage: NextPageWithLayout  = () => {
 
 HomePage.getLayout = function getLayout(page: ReactElement){
   return (
-    <ApolloProvider client={cliente}>
         <Layout>
             {page}
         </Layout>
-    </ApolloProvider>
   )
 }
 
