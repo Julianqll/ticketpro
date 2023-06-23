@@ -1,6 +1,6 @@
 import UsuarioBE from "../BE/usuarioBE";
-import { useQuery } from '@apollo/client';
-import GET_USERS from "../procedures/usuarioProcedures";
+import { useQuery, useMutation } from '@apollo/client';
+import {ADD_USER, GET_USERS} from "../procedures/usuarioProcedures";
 
 
 const UsuarioDALC = {
@@ -15,6 +15,7 @@ const UsuarioDALC = {
                   nombre: usuario.nombre,
                   apellido: usuario.apellido,
                   email: usuario.email,
+                  dni: usuario.dni,
                   contrasena: usuario.contrasena,
                   direccion: usuario.direccion,
                   telefono: usuario.telefono,
@@ -27,6 +28,9 @@ const UsuarioDALC = {
           return usuarios;
         }
 
+    },
+    añadirUsuario: (addUser, usuario) => {
+      addUser({ variables: { input: usuario } });
     },
 }
 

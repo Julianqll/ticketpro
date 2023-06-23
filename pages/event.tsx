@@ -25,11 +25,9 @@ const EventPage: NextPageWithLayout = () => {
 
 EventPage.getLayout = function getLayout(page: ReactElement){
   return (
-    <ApolloProvider client={cliente}>
         <Layout>
             {page}
         </Layout>
-    </ApolloProvider>
   )
 }
 

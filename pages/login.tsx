@@ -20,11 +20,7 @@ const LoginPage: NextPageWithLayout = () => {
 }
 
 LoginPage.getLayout = function getLayout(page: ReactElement){
-  return (
-    <ApolloProvider client={cliente}>
-        {page}
-    </ApolloProvider>
-  )
+  return page;
 }
 
 

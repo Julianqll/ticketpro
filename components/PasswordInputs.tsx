@@ -3,9 +3,9 @@ import { TextInput, PasswordInput, Tooltip, Center, Text } from '@mantine/core';
 import { IconInfoCircle } from '@tabler/icons-react';
 
 function TooltipIcon() {
-    const [opened, setOpened] = useState(false);
-    const [value, setValue] = useState('');
-    const valid = value.trim().length >= 6;
+    const [openedRepeatPassword, setOpenedRepeatPassword] = useState(false);
+    const [valueRepeatPassword, setValueRepeatPassword] = useState('');
+    const validRepeatPassword = valueRepeatPassword.trim().length >= 6;
     return (
   
         <PasswordInput
@@ -13,11 +13,11 @@ function TooltipIcon() {
           miw={150}
           required
           placeholder="Your password"
-          onFocus={() => setOpened(true)}
-          onBlur={() => setOpened(false)}
+          onFocus={() => setOpenedRepeatPassword(true)}
+          onBlur={() => setOpenedRepeatPassword(false)}
           mt="md"
-          value={value}
-          onChange={(event) => setValue(event.currentTarget.value)}
+          value={valueRepeatPassword}
+          onChange={(event) => setValueRepeatPassword(event.currentTarget.value)}
         />
     );
 }
