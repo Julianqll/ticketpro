@@ -9,6 +9,10 @@ const UsuarioBC = {
     añadirUsuario: (addUser, usuario) => {
       UsuarioDALC.añadirUsuario(addUser, usuario);
     },
+
+    login(loginUser, email, password) {
+      return UsuarioDALC.login(loginUser, email, password);
+  },
   };
 
 export default UsuarioBC;

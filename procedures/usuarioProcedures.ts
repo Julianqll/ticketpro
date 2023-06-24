@@ -20,3 +20,12 @@ mutation AddUser($input: usuario_insert_input!) {
 
 `;
 
+export const SIGNIN_USER = gql`
+query Login($email: String!, $password: String) {
+  usuario(where: {email: {_eq: $email}, contrasena: {_eq: $password}}) {
+    nombre
+    apellido
+    email
+  }
+}
+`;

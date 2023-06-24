@@ -10,6 +10,14 @@ import {
     Anchor,
     rem,
   } from '@mantine/core';
+import { useEffect, useState } from 'react';
+import UsuarioBC from '../BC/usuarioBC';
+import { useLazyQuery } from '@apollo/react-hooks';
+import { SIGNIN_USER } from '../procedures/usuarioProcedures';
+import { notifications } from '@mantine/notifications';
+import { IconX } from '@tabler/icons-react';
+import { useRouter } from 'next/router';
+
   
   const useStyles = createStyles((theme) => ({
     wrapper: {
@@ -41,9 +49,65 @@ import {
 
 
   }));
+
+  const STORAGE_KEY = "session";
   
   export function AuthenticationImage() {
+    const router = useRouter();
+    const [isLoading, setIsLoading] = useState(true);
+
+
     const { classes } = useStyles();
+    const [valueEmail, setValueEmail] = useState('');
+    const [valuePassword, setValuePassword] = useState('');
+    const [loginUser, { data, loading, error }] = useLazyQuery(SIGNIN_USER);
+    
+
+    let sessionValue;
+
+    if (typeof window !== "undefined") {
+      sessionValue = localStorage.getItem(STORAGE_KEY);
+    }
+  
+    useEffect(() => {
+      if (sessionValue){
+        router.push('/');
+      }else {
+        setIsLoading(false);
+      }
+  }, []);
+
+    useEffect(() => {
+      if (data){
+        if (data.usuario.length > 0) {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(data.usuario[0]));
+          router.push('/buy');
+        }
+        else{
+          notifications.show({
+            id: 'load-data',
+            color: 'red',
+            title: 'No se pudo iniciar sesión',
+  
+            message: 
+            <>
+              Hubo un error al inciar sesión. Intente de nuevo
+            </>
+            ,
+            icon: <IconX size="1rem" />,
+            autoClose: false
+          });
+        }
+      }
+  }, [data]);
+
+    const handleLogin = async () => {
+      await UsuarioBC.login(loginUser, valueEmail, valuePassword);
+    };
+
+    if (isLoading) {
+      return <div>Cargando..</div>
+    }
     return (
       <div className={classes.wrapper}>
 
@@ -53,10 +117,20 @@ import {
                 TICKETPRO
         </Text>
   
-          <TextInput label="Correo" placeholder="hello@gmail.com" size="md" />
-          <PasswordInput label="Contraseña" placeholder="Tu contraseña" mt="md" size="md" />
-          <Checkbox label="Recordar credenciales" mt="xl" size="md" />
-          <Button fullWidth mt="xl" size="md">
+          <TextInput 
+            label="Correo" 
+            value={valueEmail}
+            onChange={(event) => setValueEmail(event.currentTarget.value)}
+            placeholder="Tu correo" 
+            size="md" />
+          <PasswordInput 
+            label="Contraseña" 
+            placeholder="Tu contraseña" 
+            value={valuePassword}
+            onChange={(event) => setValuePassword(event.currentTarget.value)}
+            mt="md" 
+            size="md" />
+          <Button fullWidth mt="xl" size="md" onClick={handleLogin} disabled={loading ? true : undefined }>
             Ingresar
           </Button>
   
